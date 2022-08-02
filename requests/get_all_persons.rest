@@ -1,0 +1,19 @@
+GET http://localhost:3001/api/persons
+
+###
+
+GET http://localhost:3001/api/persons/1
+
+###
+
+DELETE http://localhost:3001/api/persons/77
+
+###
+
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Test content",
+    "number": "050-777-9999"
+}
