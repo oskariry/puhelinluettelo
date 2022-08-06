@@ -1,17 +1,17 @@
 const express = require('express')
+const morgan = require('morgan')
 const app = express()
+morgan.token('body', (request, response) => JSON.stringify(request.body))
+app.use(morgan(':method: url :status :res[content-length] - :response-time ms :body'))
+app.use(morgan('tiny'))
 const cors = require('cors')
 require('dotenv').config()
-const morgan = require('morgan')
 const Person = require('./models/person')
 
 
 app.use(express.json())
 app.use(cors())
 app.use(express.static('build'))
-
-morgan.token('body', (request, response) => JSON.stringify(request.body))
-app.use(morgan(':method: url :status :res[content-length] :response-time ms :body'))
 
 
 
@@ -96,7 +96,6 @@ app.get('/info', (request, response) => {
 
 app.get('/api/persons', (request, response) => {
     Person.find({}).then(returnedPersons => {
-        console.log(returnedPersons)
         response.json(returnedPersons)
     })
 })
