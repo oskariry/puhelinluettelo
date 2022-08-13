@@ -6,8 +6,8 @@ if (process.argv.length<3) {
 }
 
 
-const newName = process.argv[3] || ""
-const newNumber = process.argv[4] || ""
+const newName = process.argv[3] || ''
+const newNumber = process.argv[4] || ''
 const password = process.argv[2]
 
 const url =
@@ -23,14 +23,14 @@ const personSchema = new mongoose.Schema({
 const Person = mongoose.model('Person', personSchema)
 
 if (newName.length > 0 && newNumber.length > 0) {
-    const contactInfo = new Person({
-        name: newName,
-        number: newNumber
-    })
-    contactInfo.save().then(result => {
-        console.log(`added ${contactInfo.name} number ${contactInfo.number} to phonebook`)
-        mongoose.connection.close()
-    })
+  const contactInfo = new Person({
+    name: newName,
+    number: newNumber
+  })
+  contactInfo.save().then(() => {
+    console.log(`added ${contactInfo.name} number ${contactInfo.number} to phonebook`)
+    mongoose.connection.close()
+  })
 }
 /*
 note.save().then(result => {
@@ -40,9 +40,8 @@ note.save().then(result => {
 */
 
 Person.find({}).then(result => {
-    console.log("phonebook:")
-    result.forEach(person => {
-        console.log(person.name, person.number)
-    })
-    mongoose.connection.close()
+  result.forEach(person => {
+    console.log(person.name, person.number)
+  })
+  mongoose.connection.close()
 })
